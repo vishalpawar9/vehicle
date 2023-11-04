@@ -1,0 +1,28 @@
+<configuration>
+<property name="HOME_LOG" value="C:\\\\logs\\vehicle-rest-repo\\service.log"/>
+<appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+<file>${HOME_LOG}</file>
+<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+<fileNamePattern>C:/logs/vehicle-rest-repo/archived/app.%d{yyyy-MM-dd}.%i.log </fileNamePattern>
+<maxFileSize>5MB</maxFileSize>
+<totalSizeCap>10GB</totalSizeCap>
+<maxHistory>60</maxHistory>
+</rollingPolicy>
+<encoder>
+<pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %thread %X{correlationId} [%-5level] %class{0} - %msg%n </pattern>
+</encoder>
+</appender>
+<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+<encoder>
+<pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %thread %X{correlationId} [%-5level] %class{0} - %msg%n </pattern>
+</encoder>
+</appender>
+<logger name="com.sipl" level="debug" additivity="false">
+<appender-ref ref="FILE-ROLLING"/>
+<appender-ref ref="STDOUT"/>
+</logger>
+<root level="info">
+<appender-ref ref="FILE-ROLLING"/>
+<appender-ref ref="STDOUT"/>
+</root>
+</configuration>
